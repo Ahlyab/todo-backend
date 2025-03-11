@@ -15,6 +15,10 @@ app.use(
 app.use(express.json());
 
 // routes
+app.get("/", (req, res) => {
+  res.send("Hello,World!");
+});
+
 app.use("/todos", TodoRoutes);
 
 app.listen(port, async () => {
