@@ -28,13 +28,14 @@ const deleteTodo = async (req, res) => {
 const updateTodo = async (req, res) => {
   const { id } = req.params;
   const { title, description, completed } = req.body;
+  console.log(title, description, completed);
   const todo = await Todo.findById(id);
   if (!todo) {
     return res.status(404).json({ error: "Todo not found" });
   }
   todo.title = title || todo.title;
   todo.description = description || todo.description;
-  todo.completed = completed || todo.completed;
+  todo.completed = completed ?? todo.completed;
   await todo.save();
   res.status(200).json({ todo });
 };
